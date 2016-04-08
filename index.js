@@ -59,10 +59,11 @@ CopyStreamQuery.prototype.handleCopyInResponse = function(connection) {
   this.pipe(connection.stream)
 }
 
-CopyStreamQuery.prototype.handleCommandComplete = function() {
+CopyStreamQuery.prototype.handleCommandComplete = function(res) {
   this.unpipe()
-  this.emit('end')
+  this.emit('finished', res);
 }
 
 CopyStreamQuery.prototype.handleReadyForQuery = function() {
+  this.emit('done');
 }
